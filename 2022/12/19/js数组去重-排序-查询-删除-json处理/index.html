@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>js数组去重-排序-查询-删除-json处理 | CH博客</title>
+  <meta name="description" content="数组去重1、数组对象去重-ES51234567891011121314&#x2F;**   * 对象数组去重   * @param &amp;#123;any&amp;#125; array:数组   * @param &amp;#123;any&amp;#125; field:去重字段   *&#x2F;function filterFun(array, field) &amp;#123;    let obj &#x3D; &amp;#123;&amp;#125;;    ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js数组去重-排序-查询-删除-json处理">
+<meta property="og:url" content="https://jishuyao.cn/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="CH博客">
+<meta property="og:description" content="数组去重1、数组对象去重-ES51234567891011121314&#x2F;**   * 对象数组去重   * @param &amp;#123;any&amp;#125; array:数组   * @param &amp;#123;any&amp;#125; field:去重字段   *&#x2F;function filterFun(array, field) &amp;#123;    let obj &#x3D; &amp;#123;&amp;#125;;    ar">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-19T09:55:49.000Z">
+<meta property="article:modified_time" content="2022-12-19T10:07:59.592Z">
+<meta property="article:author" content="超航">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="前端开发">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jishuyao.cn/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="CH博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jishuyao.cn/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">姚超航</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">停下休息的时候不要忘记别人还在奔跑。</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国, 北京</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>为了自己想过的生活，勇于放弃一些东西。这个世界没有公正之处，你也永远得不到两全之计。若要自由，就得牺牲安全。若要闲散，就不能获得别人评价中的成就。若要愉悦，就无需计较身边人给予的态度。若要前行，就得离开你现在停留的地方。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSR/">SSR</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mobx/" rel="tag">Mobx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nuxt/" rel="tag">Nuxt</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">前端开发</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 13.5px;">JavaScript</a> <a href="/tags/Mobx/" style="font-size: 13px;">Mobx</a> <a href="/tags/Nuxt/" style="font-size: 14px;">Nuxt</a> <a href="/tags/React/" style="font-size: 13px;">React</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 13.5px;">前端开发</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" class="title">js数组去重-排序-查询-删除-json处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-19T09:55:49.000Z" itemprop="datePublished">2022-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/" class="title">React中使用Mobx</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T14:00:33.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&%E8%8A%82%E6%B5%81/" class="title">JavaScript防抖&amp;节流</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:31:39.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SSR/">SSR</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8wow-js%E5%8A%A0%E5%85%A5%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/" class="title">Nuxt中使用wow.js加入动画效果</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:30:17.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SSR/">SSR</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" class="title">Nuxt中使用CSS预处理器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:29:20.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-js数组去重-排序-查询-删除-json处理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      js数组去重-排序-查询-删除-json处理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" class="article-date">
+	  <time datetime="2022-12-19T09:55:49.000Z" itemprop="datePublished">2022-12-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">前端开发</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 908(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><h3 id="1、数组对象去重-ES5"><a href="#1、数组对象去重-ES5" class="headerlink" title="1、数组对象去重-ES5"></a>1、数组对象去重-ES5</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 对象数组去重</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">any</span>&#125; array:数组</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">any</span>&#125; field:去重字段</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">filterFun</span>(<span class="params">array, field</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line">    array = array.<span class="title function_">reduce</span>(<span class="function">(<span class="params">cur, next</span>) =&gt;</span> &#123;</span><br><span class="line">        obj[next.<span class="property">id</span>] ? <span class="string">&quot;&quot;</span> : obj[next.<span class="property">id</span>] = array.<span class="title function_">push</span>(next);</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;, []);<span class="comment">//设置cur默认类型为数组,并且初始值为空的数组</span></span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、数组对象去重-ES6"><a href="#2、数组对象去重-ES6" class="headerlink" title="2、数组对象去重-ES6"></a>2、数组对象去重-ES6</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 对象数组去重,type表示对象里面的一个属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">filterFun</span>(<span class="params">array, type</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line">    <span class="keyword">return</span> array.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> !map.<span class="title function_">has</span>(item[type]) &amp;&amp; map.<span class="title function_">set</span>(item[type], <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="1、日期排序"><a href="#1、日期排序" class="headerlink" title="1、日期排序"></a>1、日期排序</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">tableData</span>.<span class="title function_">sort</span>(<span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> b[<span class="string">&#x27;datatime&#x27;</span>] &lt; a[<span class="string">&#x27;datatime&#x27;</span>] ? <span class="number">1</span> : -<span class="number">1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、数据排序"><a href="#2、数据排序" class="headerlink" title="2、数据排序"></a>2、数据排序</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">tableData</span>.<span class="title function_">sort</span>(<span class="keyword">function</span>(<span class="params">a, b</span>) &#123; <span class="keyword">return</span> a-b &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="1、查询id-x3D-999的下标"><a href="#1、查询id-x3D-999的下标" class="headerlink" title="1、查询id&#x3D;999的下标"></a>1、查询id&#x3D;999的下标</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">tableData</span>.<span class="title function_">findIndex</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">id</span> === <span class="number">999</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、查询数组对象是否存在相对于key的值"><a href="#2、查询数组对象是否存在相对于key的值" class="headerlink" title="2、查询数组对象是否存在相对于key的值"></a>2、查询数组对象是否存在相对于key的值</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// if 可以省略</span></span><br><span class="line"><span class="keyword">var</span> result = arr.<span class="title function_">some</span>(<span class="function"><span class="params">item</span>=&gt;</span>item.<span class="property">name</span>===<span class="string">&#x27;张三&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result) <span class="comment">// 如果arr数组对象中含有name:&#x27;张三&#x27;,就会返回true，否则返回false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、数组对象转换为只存在的id数组"><a href="#3、数组对象转换为只存在的id数组" class="headerlink" title="3、数组对象转换为只存在的id数组"></a>3、数组对象转换为只存在的id数组</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据案例</span></span><br><span class="line"><span class="keyword">let</span> result = [&#123;<span class="attr">name</span>:<span class="string">&#x27;张三&#x27;</span>,<span class="attr">id</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">&#x27;李四&#x27;</span>,<span class="attr">id</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">&#x27;王五&#x27;</span>,<span class="attr">id</span>:<span class="number">3</span>&#125;] </span><br><span class="line"><span class="comment">// 我们需要获取Id  [1,2,3]</span></span><br><span class="line"><span class="keyword">const</span> newResult =  result.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.<span class="property">id</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newResult) <span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4、数组opt返回中文"><a href="#4、数组opt返回中文" class="headerlink" title="4、数组opt返回中文"></a>4、数组opt返回中文</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据案例</span></span><br><span class="line">typeOpt = [ &#123; <span class="attr">label</span>: <span class="string">&#x27;见面&#x27;</span>,   <span class="attr">value</span>: <span class="string">&#x27;1&#x27;</span>  &#125;, &#123;  <span class="attr">label</span>: <span class="string">&#x27;电话&#x27;</span>,   <span class="attr">value</span>: <span class="string">&#x27;2&#x27;</span>   &#125;, &#123; <span class="attr">label</span>: <span class="string">&#x27;微信&#x27;</span>,   <span class="attr">value</span>: <span class="string">&#x27;3&#x27;</span>  &#125;,  &#123; <span class="attr">label</span>: <span class="string">&#x27;QQ&#x27;</span>,  <span class="attr">value</span>: <span class="string">&#x27;4&#x27;</span> &#125;]</span><br><span class="line"><span class="comment">// 我们需要的结果是 type = &#x27;1&#x27;  or 我们显示的name 见面</span></span><br><span class="line"><span class="comment">// 方法封装</span></span><br><span class="line"><span class="keyword">const</span> typeValue = <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* array  当前数组对象</span></span><br><span class="line"><span class="comment">* label  当前显示名称的key</span></span><br><span class="line"><span class="comment">* value  当前想匹配值的key</span></span><br><span class="line"><span class="comment">* val    当前value值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">formatterName</span>(<span class="params">array, label, value, val</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    array.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">`<span class="subst">$&#123;item[label]&#125;</span>`</span> === <span class="string">`<span class="subst">$&#123;val&#125;</span>`</span>) &#123;</span><br><span class="line">            name = item[value]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> name</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="title function_">formatterName</span>(typeOpt,<span class="string">&#x27;value&#x27;</span>,<span class="string">&#x27;label&#x27;</span>,typeValue)  <span class="comment">// 结果: 见面</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5、数据过滤，返回一个新数组"><a href="#5、数据过滤，返回一个新数组" class="headerlink" title="5、数据过滤，返回一个新数组"></a>5、数据过滤，返回一个新数组</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 案例数据  </span></span><br><span class="line"><span class="keyword">const</span> list = [&#123;<span class="attr">name</span>:<span class="string">&#x27;张三&#x27;</span>,<span class="attr">age</span>:<span class="number">23</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">&#x27;李四&#x27;</span>,<span class="attr">age</span>:<span class="number">21</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">&#x27;王五&#x27;</span>,<span class="attr">age</span>:<span class="number">18</span>&#125;,]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> age = <span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据处理</span></span><br><span class="line"><span class="keyword">const</span> newList = list.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span>=&gt;</span>&#123; <span class="keyword">return</span> item.<span class="property">age</span> &gt; age &#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newList) <span class="comment">// [&#123;name:&#x27;张三&#x27;,age:23&#125;,&#123;name:&#x27;李四&#x27;,age:21&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6、数组对象过滤并且返回id"><a href="#6、数组对象过滤并且返回id" class="headerlink" title="6、数组对象过滤并且返回id"></a>6、数组对象过滤并且返回id</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据</span></span><br><span class="line"><span class="keyword">const</span> list = [&#123; <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>, <span class="attr">id</span>: <span class="number">23</span> &#125;, &#123; <span class="attr">name</span>: <span class="string">&#x27;李四&#x27;</span>, <span class="attr">id</span>: <span class="number">21</span> &#125;, &#123; <span class="attr">name</span>: <span class="string">&#x27;王五&#x27;</span>, <span class="attr">id</span>: <span class="number">18</span> &#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理</span></span><br><span class="line"><span class="keyword">const</span> newList = list.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123; <span class="keyword">return</span> item.<span class="property">id</span> &gt; <span class="number">18</span> &#125;).<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123; <span class="keyword">return</span> item.<span class="property">id</span> &#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newList) <span class="comment">// [23,21]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7、前端分页"><a href="#7、前端分页" class="headerlink" title="7、前端分页"></a>7、前端分页</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">List</span> = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>]</span><br><span class="line"><span class="title class_">List</span>.<span class="title function_">slice</span>((currentPage-<span class="number">1</span>)*pagesize,currentPage*pagesize)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//翻页设置</span></span><br><span class="line"><span class="attr">pagesizes</span>: [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>,],</span><br><span class="line"><span class="attr">pagesize</span>: <span class="number">15</span>,</span><br><span class="line"><span class="attr">currentPage</span>: <span class="number">1</span>,</span><br><span class="line"><span class="attr">total</span>: <span class="number">0</span>,</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="1、根据下标删除数据"><a href="#1、根据下标删除数据" class="headerlink" title="1、根据下标删除数据"></a>1、根据下标删除数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">nodeChecked</span>.<span class="title function_">splice</span>(index, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><h3 id="1、JSON数组集合生成树行解构"><a href="#1、JSON数组集合生成树行解构" class="headerlink" title="1、JSON数组集合生成树行解构"></a>1、JSON数组集合生成树行解构</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 案例 数据</span></span><br><span class="line"><span class="keyword">const</span> list = [</span><br><span class="line">    &#123; <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;湖北省&#x27;</span>, <span class="string">&#x27;parentId&#x27;</span>: <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;createUserId&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;createTime&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;updateUserId&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;updateTime&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;order&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;remark&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;code&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;whetherThereAreSubDepartments&#x27;</span>: <span class="literal">true</span>, <span class="string">&#x27;superiorId&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;children&#x27;</span>: <span class="literal">null</span> &#125;, &#123; <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;421000000000&#x27;</span>, <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;荆州市&#x27;</span>, <span class="string">&#x27;parentId&#x27;</span>: <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;createUserId&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;createTime&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;updateUserId&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;updateTime&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;order&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;remark&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;code&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;whetherThereAreSubDepartments&#x27;</span>: <span class="literal">true</span>, <span class="string">&#x27;superiorId&#x27;</span>: <span class="literal">null</span>, <span class="string">&#x27;children&#x27;</span>: <span class="literal">null</span> &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 获取xmSelect下拉菜单树 数据</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> <span class="variable">trrData</span></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> <span class="variable">id</span></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="title function_">getTreeData</span>(<span class="params">trrData, id</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> _this = <span class="variable language_">this</span></span><br><span class="line">    <span class="keyword">const</span> array = []</span><br><span class="line">    trrData.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item, index</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((item.<span class="property">parentId</span> || <span class="number">0</span>) == id) &#123;</span><br><span class="line">            item[<span class="string">&#x27;children&#x27;</span>] = _this.<span class="title function_">getTreeData</span>(trrData, item[<span class="string">&#x27;id&#x27;</span>])</span><br><span class="line">            array.<span class="title function_">push</span>(item)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> array</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jishuyao.cn/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" title="js数组去重-排序-查询-删除-json处理" target="_blank" rel="external">https://jishuyao.cn/2022/12/19/js数组去重-排序-查询-删除-json处理/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jishuyao.cn/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jishuyao.cn/" target="_blank"><span class="text-dark">姚超航</span><small class="ml-1x">停下休息的时候不要忘记别人还在奔跑。</small></a></h3>
+        <div>人生就像是一场旅行，不必在乎目的地，重要的是沿途的风景以及看风景的心情！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/" title="React中使用Mobx"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        &copy; 2022 超航
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://jishuyao.cn/" target="_blank"> cofess </a>base on <a href="https://jishuyao.cn//hexo-theme-pure" target="_blank">pure</a>. -->
+            <span>部分内容可能来自互联网，如有侵权，请联系作者删除！</span>
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+</body>
+</html>

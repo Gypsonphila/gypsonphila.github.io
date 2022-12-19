@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>CH博客</title>
+  
+  <subtitle>停下休息的时候不要忘记别人还在奔跑。</subtitle>
+  <link href="https://jishuyao.cn/atom.xml" rel="self"/>
+  
+  <link href="https://jishuyao.cn/"/>
+  <updated>2022-12-19T10:07:59.592Z</updated>
+  <id>https://jishuyao.cn/</id>
+  
+  <author>
+    <name>超航</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js数组去重-排序-查询-删除-json处理</title>
+    <link href="https://jishuyao.cn/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/"/>
+    <id>https://jishuyao.cn/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/</id>
+    <published>2022-12-19T09:55:49.000Z</published>
+    <updated>2022-12-19T10:07:59.592Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;数组去重&quot;&gt;&lt;a href=&quot;#数组去重&quot; class=&quot;headerlink&quot; title=&quot;数组去重&quot;&gt;&lt;/a&gt;数组去重&lt;/h2&gt;&lt;h3 id=&quot;1、数组对象去重-ES5&quot;&gt;&lt;a href=&quot;#1、数组对象去重-ES5&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    <category term="JavaScript" scheme="https://jishuyao.cn/categories/JavaScript/"/>
+    
+    
+    <category term="JavaScript" scheme="https://jishuyao.cn/tags/JavaScript/"/>
+    
+    <category term="前端开发" scheme="https://jishuyao.cn/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React中使用Mobx</title>
+    <link href="https://jishuyao.cn/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/"/>
+    <id>https://jishuyao.cn/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/</id>
+    <published>2022-12-18T14:00:33.000Z</published>
+    <updated>2022-12-19T08:43:29.164Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1、Mobx介绍&quot;&gt;&lt;a href=&quot;#1、Mobx介绍&quot; class=&quot;headerlink&quot; title=&quot;1、Mobx介绍&quot;&gt;&lt;/a&gt;1、Mobx介绍&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;一个可以和React良好配合的集中状态管理工具，和Redux解决的</summary>
+      
+    
+    
+    
+    <category term="React" scheme="https://jishuyao.cn/categories/React/"/>
+    
+    
+    <category term="前端开发" scheme="https://jishuyao.cn/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="React" scheme="https://jishuyao.cn/tags/React/"/>
+    
+    <category term="Mobx" scheme="https://jishuyao.cn/tags/Mobx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript防抖&amp;节流</title>
+    <link href="https://jishuyao.cn/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&amp;%E8%8A%82%E6%B5%81/"/>
+    <id>https://jishuyao.cn/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&amp;%E8%8A%82%E6%B5%81/</id>
+    <published>2022-12-18T13:31:39.000Z</published>
+    <updated>2022-12-19T08:43:29.163Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;两者的作用都是为了防止函数被多次调用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;防抖&quot;&gt;&lt;a href=&quot;#防抖&quot; class=&quot;headerlink&quot; title=&quot;防抖&quot;&gt;&lt;/a&gt;防抖&lt;/h3&gt;&lt;p&gt;说明：在事件被触发n秒后在执行相应</summary>
+      
+    
+    
+    
+    <category term="前端开发" scheme="https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="JavaScript" scheme="https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/"/>
+    
+    
+    <category term="JavaScript" scheme="https://jishuyao.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nuxt中使用wow.js加入动画效果</title>
+    <link href="https://jishuyao.cn/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8wow-js%E5%8A%A0%E5%85%A5%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/"/>
+    <id>https://jishuyao.cn/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8wow-js%E5%8A%A0%E5%85%A5%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/</id>
+    <published>2022-12-18T13:30:17.000Z</published>
+    <updated>2022-12-19T08:43:29.164Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;下载依赖&quot;&gt;&lt;a href=&quot;#下载依赖&quot; class=&quot;headerlink&quot; title=&quot;下载依赖&quot;&gt;&lt;/a&gt;下载依赖&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;</summary>
+      
+    
+    
+    
+    <category term="SSR" scheme="https://jishuyao.cn/categories/SSR/"/>
+    
+    
+    <category term="Nuxt" scheme="https://jishuyao.cn/tags/Nuxt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nuxt中使用CSS预处理器</title>
+    <link href="https://jishuyao.cn/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/"/>
+    <id>https://jishuyao.cn/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/</id>
+    <published>2022-12-18T13:29:20.000Z</published>
+    <updated>2022-12-19T08:43:29.163Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;less&quot;&gt;&lt;a href=&quot;#less&quot; class=&quot;headerlink&quot; title=&quot;less&quot;&gt;&lt;/a&gt;less&lt;/h2&gt;&lt;p&gt;安装依赖&lt;/p&gt;
+&lt;p&gt;npm&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table</summary>
+      
+    
+    
+    
+    <category term="SSR" scheme="https://jishuyao.cn/categories/SSR/"/>
+    
+    
+    <category term="Nuxt" scheme="https://jishuyao.cn/tags/Nuxt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nuxt2安装</title>
+    <link href="https://jishuyao.cn/2022/12/18/Nuxt2%E5%AE%89%E8%A3%85/"/>
+    <id>https://jishuyao.cn/2022/12/18/Nuxt2%E5%AE%89%E8%A3%85/</id>
+    <published>2022-12-18T13:27:53.000Z</published>
+    <updated>2022-12-19T08:43:29.163Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;npx&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;</summary>
+      
+    
+    
+    
+    <category term="SSR" scheme="https://jishuyao.cn/categories/SSR/"/>
+    
+    
+    <category term="Nuxt" scheme="https://jishuyao.cn/tags/Nuxt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git常用命令</title>
+    <link href="https://jishuyao.cn/2022/12/18/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>https://jishuyao.cn/2022/12/18/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
+    <published>2022-12-18T13:24:29.000Z</published>
+    <updated>2022-12-19T08:43:29.165Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h6 id=&quot;本地初始化仓库&quot;&gt;&lt;a href=&quot;#本地初始化仓库&quot; class=&quot;headerlink&quot; title=&quot;本地初始化仓库&quot;&gt;&lt;/a&gt;本地初始化仓库&lt;/h6&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td cl</summary>
+      
+    
+    
+    
+    <category term="开发工具" scheme="https://jishuyao.cn/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Git" scheme="https://jishuyao.cn/tags/Git/"/>
+    
+  </entry>
+  
+</feed>

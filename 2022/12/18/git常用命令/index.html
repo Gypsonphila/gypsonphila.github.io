@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>git常用命令 | CH博客</title>
+  <meta name="description" content="本地初始化仓库1git init  克隆远程仓库1git clone 远程仓库地址  克隆某个分支的代码到本地1git clone -b 分支名 远程仓库地址  查看本地git状态1git status  将某个文件或所有文件添加暂存区12git add 文件名 &#x2F;&#x2F; 将某个文件添加暂存区git add . &#x2F;&#x2F; 将所有文件添加暂存区  插销对某个文件的修改1git checkout -- fil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git常用命令">
+<meta property="og:url" content="https://jishuyao.cn/2022/12/18/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="CH博客">
+<meta property="og:description" content="本地初始化仓库1git init  克隆远程仓库1git clone 远程仓库地址  克隆某个分支的代码到本地1git clone -b 分支名 远程仓库地址  查看本地git状态1git status  将某个文件或所有文件添加暂存区12git add 文件名 &#x2F;&#x2F; 将某个文件添加暂存区git add . &#x2F;&#x2F; 将所有文件添加暂存区  插销对某个文件的修改1git checkout -- fil">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-18T13:24:29.000Z">
+<meta property="article:modified_time" content="2022-12-19T08:43:29.165Z">
+<meta property="article:author" content="超航">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jishuyao.cn/2022/12/18/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="CH博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jishuyao.cn/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">姚超航</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">停下休息的时候不要忘记别人还在奔跑。</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国, 北京</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>为了自己想过的生活，勇于放弃一些东西。这个世界没有公正之处，你也永远得不到两全之计。若要自由，就得牺牲安全。若要闲散，就不能获得别人评价中的成就。若要愉悦，就无需计较身边人给予的态度。若要前行，就得离开你现在停留的地方。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSR/">SSR</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mobx/" rel="tag">Mobx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nuxt/" rel="tag">Nuxt</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">前端开发</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 13.5px;">JavaScript</a> <a href="/tags/Mobx/" style="font-size: 13px;">Mobx</a> <a href="/tags/Nuxt/" style="font-size: 14px;">Nuxt</a> <a href="/tags/React/" style="font-size: 13px;">React</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 13.5px;">前端开发</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" class="title">js数组去重-排序-查询-删除-json处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-19T09:55:49.000Z" itemprop="datePublished">2022-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/" class="title">React中使用Mobx</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T14:00:33.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&%E8%8A%82%E6%B5%81/" class="title">JavaScript防抖&amp;节流</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:31:39.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SSR/">SSR</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8wow-js%E5%8A%A0%E5%85%A5%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/" class="title">Nuxt中使用wow.js加入动画效果</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:30:17.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SSR/">SSR</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" class="title">Nuxt中使用CSS预处理器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:29:20.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-git常用命令" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git常用命令
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/12/18/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+	  <time datetime="2022-12-18T13:24:29.000Z" itemprop="datePublished">2022-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Git/" rel="tag">Git</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/12/18/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h6 id="本地初始化仓库"><a href="#本地初始化仓库" class="headerlink" title="本地初始化仓库"></a>本地初始化仓库</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<h6 id="克隆远程仓库"><a href="#克隆远程仓库" class="headerlink" title="克隆远程仓库"></a>克隆远程仓库</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 远程仓库地址</span><br></pre></td></tr></table></figure>
+
+<h6 id="克隆某个分支的代码到本地"><a href="#克隆某个分支的代码到本地" class="headerlink" title="克隆某个分支的代码到本地"></a>克隆某个分支的代码到本地</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b 分支名 远程仓库地址</span><br></pre></td></tr></table></figure>
+
+<h6 id="查看本地git状态"><a href="#查看本地git状态" class="headerlink" title="查看本地git状态"></a>查看本地git状态</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<h6 id="将某个文件或所有文件添加暂存区"><a href="#将某个文件或所有文件添加暂存区" class="headerlink" title="将某个文件或所有文件添加暂存区"></a>将某个文件或所有文件添加暂存区</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名 // 将某个文件添加暂存区</span><br><span class="line">git add . // 将所有文件添加暂存区</span><br></pre></td></tr></table></figure>
+
+<h6 id="插销对某个文件的修改"><a href="#插销对某个文件的修改" class="headerlink" title="插销对某个文件的修改"></a>插销对某个文件的修改</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- file</span><br></pre></td></tr></table></figure>
+
+<h6 id="提交暂存区的文件"><a href="#提交暂存区的文件" class="headerlink" title="提交暂存区的文件"></a>提交暂存区的文件</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m 备注信息</span><br></pre></td></tr></table></figure>
+
+<h6 id="快捷指令查看git常用命令"><a href="#快捷指令查看git常用命令" class="headerlink" title="快捷指令查看git常用命令"></a>快捷指令查看git常用命令</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git helper -a</span><br></pre></td></tr></table></figure>
+
+<h6 id="逐行查看某个文件的修改历史"><a href="#逐行查看某个文件的修改历史" class="headerlink" title="逐行查看某个文件的修改历史"></a>逐行查看某个文件的修改历史</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git blame 文件名 // 查看该文件的修改历史</span><br><span class="line">git blame -L 100,10 文件名 // 从100行开始，到110行 逐行查看文件的修改历史</span><br></pre></td></tr></table></figure>
+
+<h6 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clean -n // 列出打算清除的档案(首先会对工作区的内容进行提示)</span><br><span class="line">git clean -f // 真正的删除</span><br><span class="line">git clean -x -f // 连.gitignore中忽略的档案也删除</span><br><span class="line">git status -sb (sb是 short branch) // 简洁的输出git status中的信息</span><br></pre></td></tr></table></figure>
+
+<h6 id="删除放入暂存区文件的方法（已经提交之后的）"><a href="#删除放入暂存区文件的方法（已经提交之后的）" class="headerlink" title="删除放入暂存区文件的方法（已经提交之后的）"></a>删除放入暂存区文件的方法（已经提交之后的）</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm 文件名 // 将该文件从commit后撤回到add后</span><br><span class="line">git reset HEAD^ --hard // 删除后 可以用git rm 文件名再回撤一步</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改文件名以及移动"><a href="#修改文件名以及移动" class="headerlink" title="修改文件名以及移动"></a>修改文件名以及移动</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git mv a b // 把a文件名字改成b 并且直接放入git add后的暂存区</span><br><span class="line">git mv b ./demos/ // 把b文件移动到demos文件夹下</span><br></pre></td></tr></table></figure>
+
+<h6 id="对比工作区、暂存区、仓库的差异"><a href="#对比工作区、暂存区、仓库的差异" class="headerlink" title="对比工作区、暂存区、仓库的差异"></a>对比工作区、暂存区、仓库的差异</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git diff // 查看变更 工作区与暂存区的差异比对</span><br><span class="line">git diff --cached // 暂存区与提交版本的差异</span><br><span class="line">git diff HEAD // 工作区与仓库中最后一次提交版本的差别</span><br><span class="line">git diff 版本哈希值 版本哈希值 // 查看这2个版本哈希之间的区别</span><br><span class="line">或者 git diff HEAD~数字 HEAD~数字</span><br><span class="line"> </span><br><span class="line">git diff tt 就是倒数第5个版本与第一个版本之间的差异</span><br><span class="line">git diff --cached tt 暂存区与倒数第5个版本之间的比对</span><br></pre></td></tr></table></figure>
+
+<h6 id="查看提交信息"><a href="#查看提交信息" class="headerlink" title="查看提交信息"></a>查看提交信息</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git show HEAD // 查看最后一次提交修改的详细信息 也可以用git show 哈希值 查看对应的内容</span><br><span class="line">git show HEAD^ // 查看倒数第二次的提交修改详细信息</span><br><span class="line">git show HEAD^^ 或者git show HEAD~2 查看前2次变更</span><br><span class="line">git show HEAD 或 git show 哈希值 或者git show tag(标签名) 都可以查看最近一次提交的详细信息</span><br></pre></td></tr></table></figure>
+
+<h6 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=format:&#x27;%h %ad | %s%d [%an]&#x27; --graph --date=short</span><br><span class="line">// 获取git log里的树形详细信息 包括hasg 日期 提交信息 提交人等</span><br><span class="line">git log --oneline //拉出所有提交信息 q是退出</span><br><span class="line">git log -5 // 查看前5次的提交记录</span><br><span class="line">git log --oneline -5 // 打印出的日志里面只有哈希值和修改的内容备注</span><br><span class="line">git log 文件名 // 查看该文件的提交</span><br><span class="line">git log --grep // 想过滤看到的内容   过滤日志</span><br><span class="line">git log -n // 查看近期提交的n条信息内容</span><br><span class="line">git log -p // 查看详细提交记录</span><br></pre></td></tr></table></figure>
+
+<h6 id="改写历史提交，把多次提交合并起来"><a href="#改写历史提交，把多次提交合并起来" class="headerlink" title="改写历史提交，把多次提交合并起来"></a>改写历史提交，把多次提交合并起来</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~3 变基之后的哈希值与之前的不同 证明变基是重新做的提交 把多次提交合并成了几次提交</span><br></pre></td></tr></table></figure>
+
+<h6 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m &quot;提交信息&quot; // 回撤上一次提交并与本次工作区一起提交</span><br><span class="line">git reset HEAD~2 --hard // 回撤2步</span><br><span class="line">git reset --files // 从仓库回撤到暂存区</span><br><span class="line">git reset HEAD // 回撤暂存区内容到工作目录</span><br><span class="line">git reset HEAD --soft 回撤提交到暂存区</span><br><span class="line">git reset HEAD --hard // 回撤提交 放弃变更 (慎用)</span><br><span class="line">git reset HEAD^  // 回撤仓库最后一次提交</span><br><span class="line">git reset --soft HEAD^ // 将执行git commit 并没有执行git push到远程仓库的内容 回撤到工作区 并且保存在工作区</span><br><span class="line">git reset --hard HEAD^ // 将执行git commit 并没有执行git push到远程仓库的内容 回撤并且不保存</span><br><span class="line">// 注意 在window电脑端 可能会出现执行git reset --hard HEAD^命令时 提示More? 所以针对windows 我们回撤内容需要键入git reset --hard HEAD^^才可以 如果我们git commit提交2次 想把2次都回撤到工作区保存 可以使用git reset --soft HEAD~2</span><br><span class="line">git reset --hard commitid // 回撤到该次提交id的位置 回撤后本地暂存区可能有内容 本地仓库有要同步的内容 此时 丢弃掉暂存区的内容 并且强制将本地的内容推送至远程仓库 执行下面的命令 git push -u -f origin 分支名 这样就可以完全回撤到提交id的位置</span><br><span class="line">git reset --soft commitid // 回撤到该次提交id的位置 并将回撤内容保存在暂存区</span><br><span class="line">git push -f -u origin 分支名 所有内容都回撤完了 将回撤后的操作强制推送到远程分支</span><br><span class="line">git push origin/分支名 --force 强制将本地回撤后的操作 强制推送到远程分支</span><br></pre></td></tr></table></figure>
+
+<h6 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">git tag // 查看列出所有打过的标签名 例如V1.1 V1.11 V1.12 V1.13等</span><br><span class="line">git tag -d 标签名 // 删除对应标签 只是删除了本地的</span><br><span class="line">git push origin :refs/tags/远程标签名 // 删除远程仓库的标签 可以在删除本地标签后 执行这个操作 同步远程</span><br><span class="line">git tag 标签名字 // 在当前仓库打个标签</span><br><span class="line">git tag 标签名 commitid // 给已知提交id的版本打标签 例如git tag v1.1.1 6f8f25fcf57a17e6c72b33f6bca0797fab15ff8b // 给历史提交打V1.1.1的tag标签 这里的commitid可以缩写 缩写成前6位就可以 例如git tag V1.1.1 6f8f25 一样可以给这个提交id打上tag</span><br><span class="line">git tag -l // 过滤tag 例如 git tag -l &quot;V1.1*&quot; // V1.1 V1.11 可以过滤前面是V1.1开头的内容</span><br><span class="line">git show 标签名称 // 查看tag的详细信息 包括commitid 作者信息 日期 内容</span><br><span class="line">git push origin 标签名称 // 同步这个tag到远程服务器 默认tag是打在本地的 这个命令可以把它推到远程</span><br><span class="line">git push origin --tags // 将本地所有tag推送到远程服务器</span><br><span class="line">git pull --tags // 把远程仓库的标签也拉取下来</span><br><span class="line">git tag foo -m &quot;message&quot; // 在当前提交上，打标签foo 并给message信息注释</span><br><span class="line">git tag 标签名 哈希值 -m &quot;message&quot; // 在某个哈希值上打标签并且写上标签的信息</span><br><span class="line">git tag foo HEAD~4 // 在当前提交之前的第4个版本上 打标签foo</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">git stash // 把暂存区的内容 暂时放在其他中 使暂存区变空</span><br><span class="line">git stash list // 查看stash了哪些存储</span><br><span class="line">git stash pop // 将stash中的内容恢复到当前目录，将缓存堆栈中的对应stash删除</span><br><span class="line">git stash apply // 将stash中的内容恢复到当前目录，不会将缓存堆栈中的对应stash删除</span><br><span class="line">git stash clear // 删除所有缓存的stash</span><br><span class="line">git reset --hard // 回撤git stash pop的内容</span><br></pre></td></tr></table></figure>
+
+<h6 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名 // 新建分支</span><br><span class="line">git branch // 查看当前所有分支</span><br><span class="line">git checkout 分支名 // 检出分支</span><br><span class="line">git checkout -b 分支名 // 创建并切换分支</span><br><span class="line">git checkout commitId 文件名（文件路径下的文件名） 还原这个文件到对应的commitId的版本</span><br><span class="line">（例如src/page/attendance/attendanceSum.vue我想把它还原到2个版本之前 首先git log src/page/attendance/attendanceSum.vue找到对应想要还原的版本</span><br><span class="line">复制版本提交的commitID 然后执行git checkout commitID src/page/attendance/attendanceSum.vue</span><br><span class="line">这样就把attendanceSum.vue这个单个文件 还原到了对应版本）</span><br><span class="line">git branch -v // 查看分支以及提交hash值和commit信息</span><br><span class="line">git merge 分支名 // 把该分支的内容合并到现有分支上</span><br><span class="line">git cherry-pick commitId // 把其他分支的某一次提交内容合并到当前分支 这个在我们平时多分支开发中很常用</span><br><span class="line">git branch -d 分支名 // 删除分支</span><br><span class="line">git branch -D 分支名 // 强制删除 若没有其他分支合并就删除 d会提示 D不会</span><br><span class="line">git branch -m 旧分支名 新分支名 // 修改分支名</span><br><span class="line">git branch -M 旧分支名 新分支名 // 修改分支名 M强制修改 若与其他分支有冲突也会创建(慎用)</span><br><span class="line">git branch -r // 列出远程分支(远程所有分支名)</span><br><span class="line">git branch -a // 查看远程分支(列出远程分支以及本地分支名 远程分支会以remote/origin/分支名这种形式展示 红色标识)</span><br><span class="line">git branch // 查看本地分支</span><br><span class="line">git reflog show --date=iso &lt;branch name&gt; // 查看分支创建时间 例如git reflog show --date=iso origin/feature-PCDEC-6375 输出 88e22885 (HEAD -&gt; feature-PCDEC-6375, origin/feature-PCDEC-6375, origin/EC-master, EC-master) refs/remotes/origin/feature-PCDEC-6375@&#123;2021-07-27 11:31:23 +0800&#125;: fetch: storing head 创建时间就是2021-07-27 11:31:23</span><br><span class="line">git fetch // 更新remote索引</span><br><span class="line">git push -u origin 分支名 // 将本地分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push 也可解决 git建立远程分支关联时出现fatal ... upstram的问题</span><br><span class="line">git push origin --delete 分支名 (将git branch -D 分支名 删掉的分支 同步到远程主机 将origin/分支名的该分支也删除掉)</span><br><span class="line">git remote show origin 查看remote地址，远程分支，还有本地分支与之相对应关系等信息(结合git branch -a使用)</span><br><span class="line">git remote prune origin 删除远程仓库不存在的分支 (git branch -a使用)</span><br><span class="line">git reflog show --date=iso 分支名 // 查看指定分支的创建时间 以及更改记录等</span><br></pre></td></tr></table></figure>
+
+<h6 id="仓库迁移"><a href="#仓库迁移" class="headerlink" title="仓库迁移"></a>仓库迁移</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 首先在当前项目主分支先执行git pull 把代码更新为最新</span><br><span class="line">git remote set-url origin &lt;新的仓库名&gt;</span><br><span class="line">git push -u -f origin</span><br><span class="line">git push -u -f origin --all // 把所有分支迁移过去</span><br><span class="line">git push -u -f origin --tags // 把所有tag迁移过去</span><br><span class="line">// 然后去拉取新的仓库代码就可以了 如果新仓库之前拉取过了</span><br><span class="line">重新仓库迁移 里面分支没同步的话 执行 git fetch试一下 同步过来</span><br></pre></td></tr></table></figure>
+
+<h6 id="强制推送"><a href="#强制推送" class="headerlink" title="强制推送"></a>强制推送</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -- force</span><br></pre></td></tr></table></figure>
+
+<h6 id="打开git-GUI"><a href="#打开git-GUI" class="headerlink" title="打开git GUI"></a>打开git GUI</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitk // 用git命令快速打开git GUI</span><br></pre></td></tr></table></figure>
+
+<h6 id="config以及配置"><a href="#config以及配置" class="headerlink" title="config以及配置"></a>config以及配置</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config --list // 获取config信息</span><br><span class="line">git config --global core.safecrlf false // 去掉git add 命令后 出现的一堆CR LF提示信息</span><br><span class="line">其中CR是回车的意思 LF是换行</span><br><span class="line">git config --global user.name&quot;your name&quot; // 设置username</span><br><span class="line">git config --global user.email&quot;your_email@youremail.com&quot; // 设置邮箱</span><br><span class="line">git config --global credential.helper wincred // 存储凭证 (可用于输入一次用户密码后，不再输入 有时我们已经用SSH key 绑定关联好了 但是每次git提交的时候 还是需要你输入用户名密码 在这个时候 敲入这个命令 将凭证存储起来 用户名密码就不需要再次输入了)</span><br><span class="line">git config --global alias.ci commit // 将commit命令设置别名ci git commit命令将由git ci来代替</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jishuyao.cn/2022/12/18/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令" target="_blank" rel="external">https://jishuyao.cn/2022/12/18/git常用命令/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jishuyao.cn/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jishuyao.cn/" target="_blank"><span class="text-dark">姚超航</span><small class="ml-1x">停下休息的时候不要忘记别人还在奔跑。</small></a></h3>
+        <div>人生就像是一场旅行，不必在乎目的地，重要的是沿途的风景以及看风景的心情！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/12/18/Nuxt2%E5%AE%89%E8%A3%85/" title="Nuxt2安装"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        &copy; 2022 超航
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://jishuyao.cn/" target="_blank"> cofess </a>base on <a href="https://jishuyao.cn//hexo-theme-pure" target="_blank">pure</a>. -->
+            <span>部分内容可能来自互联网，如有侵权，请联系作者删除！</span>
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+</body>
+</html>

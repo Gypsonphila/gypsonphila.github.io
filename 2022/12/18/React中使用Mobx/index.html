@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>React中使用Mobx | CH博客</title>
+  <meta name="description" content="1、Mobx介绍 一个可以和React良好配合的集中状态管理工具，和Redux解决的问题相似，都可以独立组件进行集中状态管理   优势 简单编写无模板的极简代码精准描述你的意图  轻松实现最优渲染依赖自动追踪，实现最小渲染优化 架构自由可移植, 可测试 无特殊心智负担  社区评价 2、配置开发环境 Mobx是一个独立的响应式的库，可以独立于任何UI框架存在，但是通常大家习惯把它和React进行绑定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React中使用Mobx">
+<meta property="og:url" content="https://jishuyao.cn/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/index.html">
+<meta property="og:site_name" content="CH博客">
+<meta property="og:description" content="1、Mobx介绍 一个可以和React良好配合的集中状态管理工具，和Redux解决的问题相似，都可以独立组件进行集中状态管理   优势 简单编写无模板的极简代码精准描述你的意图  轻松实现最优渲染依赖自动追踪，实现最小渲染优化 架构自由可移植, 可测试 无特殊心智负担  社区评价 2、配置开发环境 Mobx是一个独立的响应式的库，可以独立于任何UI框架存在，但是通常大家习惯把它和React进行绑定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323528.png">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323329.png">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182322174.png">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323087.png">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323983.png">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323735.png">
+<meta property="article:published_time" content="2022-12-18T14:00:33.000Z">
+<meta property="article:modified_time" content="2022-12-19T08:43:29.164Z">
+<meta property="article:author" content="超航">
+<meta property="article:tag" content="前端开发">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Mobx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323528.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jishuyao.cn/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="CH博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jishuyao.cn/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">姚超航</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">停下休息的时候不要忘记别人还在奔跑。</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国, 北京</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>为了自己想过的生活，勇于放弃一些东西。这个世界没有公正之处，你也永远得不到两全之计。若要自由，就得牺牲安全。若要闲散，就不能获得别人评价中的成就。若要愉悦，就无需计较身边人给予的态度。若要前行，就得离开你现在停留的地方。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSR/">SSR</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mobx/" rel="tag">Mobx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nuxt/" rel="tag">Nuxt</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">前端开发</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 13.5px;">JavaScript</a> <a href="/tags/Mobx/" style="font-size: 13px;">Mobx</a> <a href="/tags/Nuxt/" style="font-size: 14px;">Nuxt</a> <a href="/tags/React/" style="font-size: 13px;">React</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 13.5px;">前端开发</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" class="title">js数组去重-排序-查询-删除-json处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-19T09:55:49.000Z" itemprop="datePublished">2022-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/" class="title">React中使用Mobx</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T14:00:33.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&%E8%8A%82%E6%B5%81/" class="title">JavaScript防抖&amp;节流</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:31:39.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SSR/">SSR</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8wow-js%E5%8A%A0%E5%85%A5%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/" class="title">Nuxt中使用wow.js加入动画效果</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:30:17.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SSR/">SSR</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" class="title">Nuxt中使用CSS预处理器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:29:20.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-React中使用Mobx" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React中使用Mobx
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/" class="article-date">
+	  <time datetime="2022-12-18T14:00:33.000Z" itemprop="datePublished">2022-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Mobx/" rel="tag">Mobx</a>, <a class="article-tag-link-link" href="/tags/React/" rel="tag">React</a>, <a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">前端开发</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="1、Mobx介绍"><a href="#1、Mobx介绍" class="headerlink" title="1、Mobx介绍"></a>1、Mobx介绍</h2><blockquote>
+<p>一个可以和React良好配合的集中状态管理工具，和Redux解决的问题相似，都可以独立组件进行集中状态管理</p>
+</blockquote>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323528.png"></p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ol>
+<li>简单<br>编写无模板的极简代码精准描述你的意图 </li>
+<li>轻松实现最优渲染<br>依赖自动追踪，实现最小渲染优化</li>
+<li>架构自由<br>可移植, 可测试 无特殊心智负担</li>
+</ol>
+<h3 id="社区评价"><a href="#社区评价" class="headerlink" title="社区评价"></a>社区评价</h3><p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323329.png"></p>
+<h2 id="2、配置开发环境"><a href="#2、配置开发环境" class="headerlink" title="2、配置开发环境"></a>2、配置开发环境</h2><blockquote>
+<p>Mobx是一个独立的响应式的库，可以独立于任何UI框架存在，但是通常大家习惯把它和React进行绑定使用，用Mobx来做响应式数据建模，React作为UI视图框架渲染内容，我们环境的配置需要三个部分</p>
+<ol>
+<li>一个create-react-app创建好的React项目环境</li>
+<li>mobx框架本身</li>
+<li>一个用来链接mobx和React的中间件</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建项目</span></span><br><span class="line">$ yarn create vite react-mobx --template react</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装mobx和中间件工具 mobx-react-lite  只能函数组件中使用</span></span><br><span class="line">$ yarn add  mobx  mobx-react-lite</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、基础使用"><a href="#3、基础使用" class="headerlink" title="3、基础使用"></a>3、基础使用</h2><blockquote>
+<p>需求: 使用mobx实现一个计数器的案例</p>
+</blockquote>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182322174.png"></p>
+<h3 id="1、初始化mobx"><a href="#1、初始化mobx" class="headerlink" title="1、初始化mobx"></a>1、初始化mobx</h3><blockquote>
+<p>初始化步骤</p>
+<ol>
+<li>定义数据状态<strong>state</strong></li>
+<li>在构造器中实现数据响应式处理 <strong>makeAutoObservble</strong></li>
+<li>定义修改数据的函数<strong>action</strong></li>
+<li>实例化store并导出</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counterStore.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; makeAutoObservable &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterStore</span> &#123;</span><br><span class="line">  count = <span class="number">0</span> <span class="comment">// 定义数据</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">makeAutoObservable</span>(<span class="variable language_">this</span>)  <span class="comment">// 响应式处理</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 定义修改数据的方法</span></span><br><span class="line">  addCount = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">count</span>++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = <span class="keyword">new</span> <span class="title class_">CounterStore</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> counter</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、React使用store"><a href="#2、React使用store" class="headerlink" title="2、React使用store"></a>2、React使用store</h3><blockquote>
+<p>实现步骤</p>
+<ol>
+<li>在组件中导入counterStore实例对象</li>
+<li>在组件中使用storeStore实例对象中的数据</li>
+<li>通过事件调用修改数据的方法修改store中的数据</li>
+<li>让组件响应数据变化</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.jsx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入counterStore</span></span><br><span class="line"><span class="keyword">import</span> counterStore <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="comment">// 导入observer方法</span></span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> counterStore.addCount()&#125;&gt;</span></span><br><span class="line"><span class="language-xml">        &#123;counterStore.count&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 包裹组件让视图响应数据变化</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">App</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、计算属性（衍生状态）"><a href="#4、计算属性（衍生状态）" class="headerlink" title="4、计算属性（衍生状态）"></a>4、计算属性（衍生状态）</h3><blockquote>
+<p>概念: 有一些状态根据现有的状态计算（衍生）得到，我们把这种状态叫做计算属性, 看下面的例子</p>
+</blockquote>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323087.png"></p>
+<blockquote>
+<p>实现步骤</p>
+<ol>
+<li>声明一个存在的数据</li>
+<li>通过get关键词 定义计算属性</li>
+<li>在 makeAutoObservable 方法中标记计算属性</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counterStore.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; computed, makeAutoObservable &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterStore</span> &#123;</span><br><span class="line">  list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">makeAutoObservable</span>(<span class="variable language_">this</span>, &#123;</span><br><span class="line">      <span class="attr">filterList</span>: computed</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 修改原数组</span></span><br><span class="line">  changeList = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">push</span>(<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 定义计算属性</span></span><br><span class="line">  get filterList () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> item &gt; <span class="number">4</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = <span class="keyword">new</span> <span class="title class_">CounterStore</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> counter</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.jsx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入counterStore</span></span><br><span class="line"><span class="keyword">import</span> counterStore <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="comment">// 导入observer方法</span></span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;/* 原数组 */&#125;</span></span><br><span class="line"><span class="language-xml">      &#123;JSON.stringify(counterStore.list)&#125;</span></span><br><span class="line"><span class="language-xml">      &#123;/* 计算属性 */&#125;</span></span><br><span class="line"><span class="language-xml">      &#123;JSON.stringify(counterStore.filterList)&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> counterStore.changeList()&#125;&gt;change list<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 包裹组件让视图响应数据变化</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">App</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、异步数据处理"><a href="#5、异步数据处理" class="headerlink" title="5、异步数据处理"></a>5、异步数据处理</h3><blockquote>
+<p>实现步骤:</p>
+<ol>
+<li>在mobx中编写异步请求方法 获取数据 存入state中</li>
+<li>组件中通过 useEffect + 空依赖  触发action函数的执行</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// channelStore.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步的获取</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; makeAutoObservable &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ChannelStore</span> &#123;</span><br><span class="line">  channelList = []</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">makeAutoObservable</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 只要调用这个方法 就可以从后端拿到数据并且存入channelList</span></span><br><span class="line">  setChannelList = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> axios.<span class="title function_">get</span>(<span class="string">&#x27;http://xxx/api/testurl&#x27;</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">channelList</span> = res.<span class="property">data</span>.<span class="property">data</span>.<span class="property">channels</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> channlStore = <span class="keyword">new</span> <span class="title class_">ChannelStore</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> channlStore</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.jsx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; channlStore &#125; = <span class="title function_">useStore</span>()</span><br><span class="line">  <span class="comment">// 1. 使用数据渲染组件</span></span><br><span class="line">  <span class="comment">// 2. 触发action函数发送异步请求</span></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    channlStore.<span class="title function_">setChannelList</span>()</span><br><span class="line">  &#125;, [])</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;channlStore.channelList.map((item) =&gt; (</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span>&gt;</span>&#123;item.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      ))&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 让组件可以响应数据的变化[也就是数据一变组件重新渲染]</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">App</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、模块化"><a href="#6、模块化" class="headerlink" title="6、模块化"></a>6、模块化</h3><blockquote>
+<p>场景: 一个项目有很多的业务模块，我们不能把所有的代码都写到一起，这样不好维护，提了提供可维护性，需要引入模块化机制</p>
+</blockquote>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323983.png"></p>
+<blockquote>
+<p>实现步骤</p>
+<ol>
+<li>拆分模块js文件，每个模块中定义自己独立的state&#x2F;action</li>
+<li>在store&#x2F;index.js中导入拆分之后的模块，进行模块组合</li>
+<li>利用React的context的机制导出统一的useStore方法，给业务组件使用</li>
+</ol>
+</blockquote>
+<p>1-定义task模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store/taskStore.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; makeAutoObservable &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskStore</span> &#123;</span><br><span class="line">  taskList = []</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">makeAutoObservable</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  addTask () &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">taskList</span>.<span class="title function_">push</span>(<span class="string">&#x27;vue&#x27;</span>, <span class="string">&#x27;react&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> task = <span class="keyword">new</span> <span class="title class_">TaskStore</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> task</span><br></pre></td></tr></table></figure>
+
+<p>2-定义counterStore</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store/counterStore.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; makeAutoObservable &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CounterStore</span> &#123;</span><br><span class="line">  count = <span class="number">0</span></span><br><span class="line">  list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">makeAutoObservable</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  addCount = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">count</span>++</span><br><span class="line">  &#125;</span><br><span class="line">  changeList = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">push</span>(<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  get filterList () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> item &gt; <span class="number">4</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = <span class="keyword">new</span> <span class="title class_">CounterStore</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> counter</span><br></pre></td></tr></table></figure>
+
+<p>3-组合模块导出统一方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> counter <span class="keyword">from</span> <span class="string">&#x27;./counterStore&#x27;</span></span><br><span class="line"><span class="keyword">import</span> task <span class="keyword">from</span> <span class="string">&#x27;./taskStore&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RootStore</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">counterStore</span> = counter</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">taskStore</span> = task</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rootStore = <span class="keyword">new</span> <span class="title class_">RootStore</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// context机制的数据查找链  Provider如果找不到 就找createContext方法执行时传入的参数</span></span><br><span class="line"><span class="keyword">const</span> context = <span class="title class_">React</span>.<span class="title function_">createContext</span>(rootStore)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">useStore</span> = (<span class="params"></span>) =&gt; <span class="title class_">React</span>.<span class="title function_">useContext</span>(context)</span><br><span class="line"><span class="comment">// useStore() =&gt;  rootStore  &#123; counterStore, taskStore &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; useStore &#125;</span><br></pre></td></tr></table></figure>
+
+<p>4-组件使用模块中的数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line"><span class="comment">// 导入方法</span></span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 得到store</span></span><br><span class="line">  <span class="keyword">const</span> store = <span class="title function_">useStore</span>()</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> store.counterStore.addCount()&#125;&gt;</span></span><br><span class="line"><span class="language-xml">        &#123;store.counterStore.count&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 包裹组件让视图响应数据变化</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">App</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="7、多组件共享数据"><a href="#7、多组件共享数据" class="headerlink" title="7、多组件共享数据"></a>7、多组件共享数据</h3><blockquote>
+<p>目标：当数据发生变化 所有用到数据的组件都会得到同步的组件的更新</p>
+<p>实现步骤：在Foo组件和Bar组件中分别使用store中的数据，然后在app组件中进行数据修改，查看Foo组件和Bar组件是否得到更新</p>
+</blockquote>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212182323735.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Bar.jsx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用taskStore中的taskList数据</span></span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Bar</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; taskStore &#125; = <span class="title function_">useStore</span>()</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;taskStore.taskList.map((item) =&gt; (</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      ))&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">Son</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Foo.jsx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用taskStore中的taskList数据</span></span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Bar</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; taskStore &#125; = <span class="title function_">useStore</span>()</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;taskStore.taskList.map((item) =&gt; (</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;item&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      ))&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="title class_">Son</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.jsx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Bar</span> <span class="keyword">from</span> <span class="string">&#x27;./Bar&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Foo</span> <span class="keyword">from</span> <span class="string">&#x27;./Foo&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; taskStore &#125; = <span class="title function_">useStore</span>()</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Bar</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> taskStore.setTaskList(&#x27;angular&#x27;)&#125;&gt;</span></span><br><span class="line"><span class="language-xml">        修改taskStore</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span> </span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jishuyao.cn/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/" title="React中使用Mobx" target="_blank" rel="external">https://jishuyao.cn/2022/12/18/React中使用Mobx/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jishuyao.cn/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jishuyao.cn/" target="_blank"><span class="text-dark">姚超航</span><small class="ml-1x">停下休息的时候不要忘记别人还在奔跑。</small></a></h3>
+        <div>人生就像是一场旅行，不必在乎目的地，重要的是沿途的风景以及看风景的心情！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" title="js数组去重-排序-查询-删除-json处理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&%E8%8A%82%E6%B5%81/" title="JavaScript防抖&amp;节流"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        &copy; 2022 超航
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://jishuyao.cn/" target="_blank"> cofess </a>base on <a href="https://jishuyao.cn//hexo-theme-pure" target="_blank">pure</a>. -->
+            <span>部分内容可能来自互联网，如有侵权，请联系作者删除！</span>
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+</body>
+</html>
