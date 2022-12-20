@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>基于rem和scale的屏幕适配方案 | CH博客</title>
+  <meta name="description" content="基于rem的适配方案rem是什么？ rem是指相对于根元素的字体大小的单位，在日常开发过程中我们通常把根元素（html&#x2F;body）的字体设置为10px,方便于我们计算（此时子元素的1rem就相当于10px）。  适用场景 项目实战1、安装依赖 1npm i postcss-pxtorem autoprefixer amfe-flexible --save-dev  2、项目根目录创建 p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于rem和scale的屏幕适配方案">
+<meta property="og:url" content="https://jishuyao.cn/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="CH博客">
+<meta property="og:description" content="基于rem的适配方案rem是什么？ rem是指相对于根元素的字体大小的单位，在日常开发过程中我们通常把根元素（html&#x2F;body）的字体设置为10px,方便于我们计算（此时子元素的1rem就相当于10px）。  适用场景 项目实战1、安装依赖 1npm i postcss-pxtorem autoprefixer amfe-flexible --save-dev  2、项目根目录创建 p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201425180.gif">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201426337.jpg">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201429474.gif">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201430245.jpg">
+<meta property="og:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201431706.jpg">
+<meta property="article:published_time" content="2022-12-20T06:22:48.000Z">
+<meta property="article:modified_time" content="2022-12-20T06:32:05.671Z">
+<meta property="article:author" content="超航">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201425180.gif">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jishuyao.cn/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="CH博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jishuyao.cn/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">姚超航</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">停下休息的时候不要忘记别人还在奔跑。</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国, 北京</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>为了自己想过的生活，勇于放弃一些东西。这个世界没有公正之处，你也永远得不到两全之计。若要自由，就得牺牲安全。若要闲散，就不能获得别人评价中的成就。若要愉悦，就无需计较身边人给予的态度。若要前行，就得离开你现在停留的地方。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSR/">SSR</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mobx/" rel="tag">Mobx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nuxt/" rel="tag">Nuxt</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">前端开发</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 13.5px;">JavaScript</a> <a href="/tags/Mobx/" style="font-size: 13px;">Mobx</a> <a href="/tags/Nuxt/" style="font-size: 14px;">Nuxt</a> <a href="/tags/React/" style="font-size: 13px;">React</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 13.5px;">前端开发</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/CSS/">CSS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/" class="title">基于rem和scale的屏幕适配方案</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-20T06:22:48.000Z" itemprop="datePublished">2022-12-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" class="title">js数组去重-排序-查询-删除-json处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-19T09:55:49.000Z" itemprop="datePublished">2022-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/React%E4%B8%AD%E4%BD%BF%E7%94%A8Mobx/" class="title">React中使用Mobx</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T14:00:33.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/">JavaScript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&%E8%8A%82%E6%B5%81/" class="title">JavaScript防抖&amp;节流</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:31:39.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SSR/">SSR</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8wow-js%E5%8A%A0%E5%85%A5%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/" class="title">Nuxt中使用wow.js加入动画效果</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-18T13:30:17.000Z" itemprop="datePublished">2022-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-基于rem和scale的屏幕适配方案" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于rem和scale的屏幕适配方案
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/" class="article-date">
+	  <time datetime="2022-12-20T06:22:48.000Z" itemprop="datePublished">2022-12-20</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/CSS/" rel="tag">CSS</a>, <a class="article-tag-link-link" href="/tags/Vue/" rel="tag">Vue</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 833(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="基于rem的适配方案"><a href="#基于rem的适配方案" class="headerlink" title="基于rem的适配方案"></a>基于rem的适配方案</h2><h4 id="rem是什么？"><a href="#rem是什么？" class="headerlink" title="rem是什么？"></a>rem是什么？</h4><blockquote>
+<p>rem是指相对于根元素的字体大小的单位，在日常开发过程中我们通常把根元素（html&#x2F;body）的字体设置为10px,方便于我们计算（此时子元素的1rem就相当于10px）。</p>
+</blockquote>
+<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201425180.gif"></p>
+<h4 id="项目实战"><a href="#项目实战" class="headerlink" title="项目实战"></a>项目实战</h4><p>1、安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i postcss-pxtorem autoprefixer amfe-flexible --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>2、项目根目录创建 <code>postcss.config.js</code> 文件</p>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201426337.jpg"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line"> <span class="attr">plugins</span>: &#123;</span><br><span class="line">  <span class="attr">autoprefixer</span>: &#123;</span><br><span class="line">   <span class="attr">overrideBrowserslist</span>: [</span><br><span class="line">    <span class="string">&quot;Android 4.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;iOS 7.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Chrome &gt; 31&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ff &gt; 31&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ie &gt;= 8&quot;</span>,</span><br><span class="line">    <span class="string">&quot;last 10 versions&quot;</span>, <span class="comment">// 所有主流浏览器最近10版本用</span></span><br><span class="line">   ],</span><br><span class="line">   <span class="attr">grid</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;postcss-pxtorem&quot;</span>: &#123;</span><br><span class="line">   <span class="attr">rootValue</span>: <span class="number">192</span>, <span class="comment">// 设计稿宽度的1/ 10 例如设计稿按照 1920设计 此处就为192</span></span><br><span class="line">   <span class="attr">propList</span>: [<span class="string">&quot;*&quot;</span>, <span class="string">&quot;!border&quot;</span>], <span class="comment">// 除 border 外所有px 转 rem</span></span><br><span class="line">   <span class="attr">selectorBlackList</span>: [<span class="string">&quot;.el-&quot;</span>], <span class="comment">// 过滤掉.el-开头的class，不进行rem转换</span></span><br><span class="line">  &#125;,</span><br><span class="line"> &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>3、<code>main.ts/js</code> 文件中导入依赖</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;amfe-flexible/index.js&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>4、重启项目</p>
+<h2 id="基于scale的适配方案"><a href="#基于scale的适配方案" class="headerlink" title="基于scale的适配方案"></a>基于scale的适配方案</h2><blockquote>
+<p>在CSS3中，我们可以使用transform属性的scale()方法来实现元素的缩放效果。缩放，指的是“缩小”和“放大”的意思。</p>
+</blockquote>
+<ul>
+<li>transform: scaleX(x); &#x2F; 沿x轴方向缩放&#x2F;</li>
+<li>transform: scaleY(y); &#x2F; 沿y轴方向缩放&#x2F;</li>
+<li>transform: scale(); &#x2F; 同时沿x轴和y轴缩放&#x2F;</li>
+</ul>
+<h4 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h4><p>固定宽高比的Web应用，如大屏或者固定窗口业务应用</p>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201429474.gif"></p>
+<h4 id="项目实战-1"><a href="#项目实战-1" class="headerlink" title="项目实战"></a>项目实战</h4><p>1、新建<code>resize.ts/js</code>文件</p>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201430245.jpg"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">windowResize</span>(<span class="params"></span>) &#123;</span><br><span class="line"> <span class="comment">// * 指向最外层容器</span></span><br><span class="line"> <span class="keyword">const</span> screenRef = <span class="title function_">ref</span>();</span><br><span class="line"> <span class="comment">// * 定时函数</span></span><br><span class="line"> <span class="keyword">const</span> timer = <span class="title function_">ref</span>(<span class="number">0</span>);</span><br><span class="line"> <span class="comment">// * 默认缩放值</span></span><br><span class="line"> <span class="keyword">const</span> scale = &#123;</span><br><span class="line">  <span class="attr">width</span>: <span class="string">&quot;1&quot;</span>,</span><br><span class="line">  <span class="attr">height</span>: <span class="string">&quot;1&quot;</span>,</span><br><span class="line"> &#125;;</span><br><span class="line">    </span><br><span class="line"> <span class="comment">// * 设计稿尺寸（px）</span></span><br><span class="line"> <span class="keyword">const</span> baseWidth = <span class="number">1920</span>;</span><br><span class="line"> <span class="keyword">const</span> baseHeight = <span class="number">1080</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// * 需保持的比例（默认1.77778）</span></span><br><span class="line"> <span class="keyword">const</span> baseProportion = <span class="built_in">parseFloat</span>((baseWidth / baseHeight).<span class="title function_">toFixed</span>(<span class="number">5</span>));</span><br><span class="line"> <span class="keyword">const</span> <span class="title function_">calcRate</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 当前宽高比</span></span><br><span class="line">  <span class="keyword">const</span> currentRate = <span class="built_in">parseFloat</span>(</span><br><span class="line">   (<span class="variable language_">window</span>.<span class="property">innerWidth</span> / <span class="variable language_">window</span>.<span class="property">innerHeight</span>).<span class="title function_">toFixed</span>(<span class="number">5</span>)</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span> (screenRef.<span class="property">value</span>) &#123;</span><br><span class="line">   <span class="keyword">if</span> (currentRate &gt; baseProportion) &#123;</span><br><span class="line">    <span class="comment">// 表示更宽</span></span><br><span class="line">    scale.<span class="property">width</span> = (</span><br><span class="line">     (<span class="variable language_">window</span>.<span class="property">innerHeight</span> * baseProportion) /</span><br><span class="line">     baseWidth</span><br><span class="line">    ).<span class="title function_">toFixed</span>(<span class="number">5</span>);</span><br><span class="line">    scale.<span class="property">height</span> = (<span class="variable language_">window</span>.<span class="property">innerHeight</span> / baseHeight).<span class="title function_">toFixed</span>(<span class="number">5</span>);</span><br><span class="line">    screenRef.<span class="property">value</span>.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`scale(<span class="subst">$&#123;scale.width&#125;</span>, <span class="subst">$&#123;scale.height&#125;</span>)`</span>;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 表示更高</span></span><br><span class="line">    scale.<span class="property">height</span> = (</span><br><span class="line">     <span class="variable language_">window</span>.<span class="property">innerWidth</span> /</span><br><span class="line">     baseProportion /</span><br><span class="line">     baseHeight</span><br><span class="line">    ).<span class="title function_">toFixed</span>(<span class="number">5</span>);</span><br><span class="line">    scale.<span class="property">width</span> = (<span class="variable language_">window</span>.<span class="property">innerWidth</span> / baseWidth).<span class="title function_">toFixed</span>(<span class="number">5</span>);</span><br><span class="line">    screenRef.<span class="property">value</span>.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`scale(<span class="subst">$&#123;scale.width&#125;</span>, <span class="subst">$&#123;scale.height&#125;</span>)`</span>;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">const</span> <span class="title function_">resize</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="built_in">clearTimeout</span>(timer.<span class="property">value</span>);</span><br><span class="line">  timer.<span class="property">value</span> = <span class="variable language_">window</span>.<span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">   <span class="title function_">calcRate</span>();</span><br><span class="line">  &#125;, <span class="number">200</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 改变窗口大小重新绘制</span></span><br><span class="line"> <span class="keyword">const</span> <span class="title function_">windowDraw</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;resize&quot;</span>, resize);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 改变窗口大小重新绘制</span></span><br><span class="line"> <span class="keyword">const</span> <span class="title function_">unWindowDraw</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&quot;resize&quot;</span>, resize);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> &#123;</span><br><span class="line">  screenRef,</span><br><span class="line">  calcRate,</span><br><span class="line">  windowDraw,</span><br><span class="line">  unWindowDraw,</span><br><span class="line"> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、相关界面引入<code>resize.ts/js</code></p>
+<p><img src="https://blog-image-ch.oss-cn-hangzhou.aliyuncs.com/blog-image/202212201431706.jpg"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;screen-container&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;screen-content&quot; ref=&quot;screenRef&quot;&gt;</span><br><span class="line">            &lt;span class=&quot;screen-title&quot;&gt;基于scale的适配方案&lt;/span&gt;</span><br><span class="line">            &lt;img class=&quot;screen-img&quot; src=&quot;https://img2.baidu.com/it/u=1297807229,3828610143&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=281&quot; alt=&quot;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import windowResize from &#x27;../../utils/resize&#x27;;</span><br><span class="line">import &#123;onMounted, onUnmounted&#125; from &#x27;vue&#x27;;</span><br><span class="line"></span><br><span class="line">const &#123; screenRef, calcRate, windowDraw, unWindowDraw &#125; = windowResize()</span><br><span class="line"></span><br><span class="line">onMounted(() =&gt; &#123;</span><br><span class="line">    // 监听浏览器窗口尺寸变化</span><br><span class="line">    windowDraw()</span><br><span class="line">    calcRate()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">onUnmounted(() =&gt; &#123;</span><br><span class="line">    unWindowDraw();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">.screen-container &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">    background-color: lightcyan;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items: center;</span><br><span class="line"></span><br><span class="line">    .screen-content &#123;</span><br><span class="line">        width: 1920px;</span><br><span class="line">        height: 1080px;</span><br><span class="line">        background-color: #fff;</span><br><span class="line">        display: flex;</span><br><span class="line">        justify-content: center;</span><br><span class="line">        align-items: center;</span><br><span class="line">        flex-direction: column;</span><br><span class="line"></span><br><span class="line">        .screen-title &#123;</span><br><span class="line">            font-size: 32px;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .screen-img &#123;</span><br><span class="line">            margin-top: 20px;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jishuyao.cn/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/" title="基于rem和scale的屏幕适配方案" target="_blank" rel="external">https://jishuyao.cn/2022/12/20/基于rem和scale的屏幕适配方案/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jishuyao.cn/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jishuyao.cn/" target="_blank"><span class="text-dark">姚超航</span><small class="ml-1x">停下休息的时候不要忘记别人还在奔跑。</small></a></h3>
+        <div>人生就像是一场旅行，不必在乎目的地，重要的是沿途的风景以及看风景的心情！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/12/19/js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D-%E6%8E%92%E5%BA%8F-%E6%9F%A5%E8%AF%A2-%E5%88%A0%E9%99%A4-json%E5%A4%84%E7%90%86/" title="js数组去重-排序-查询-删除-json处理"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        &copy; 2022 超航
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://jishuyao.cn/" target="_blank"> cofess </a>base on <a href="https://jishuyao.cn//hexo-theme-pure" target="_blank">pure</a>. -->
+            <span>部分内容可能来自互联网，如有侵权，请联系作者删除！</span>
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+</body>
+</html>

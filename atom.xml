@@ -6,7 +6,7 @@
   <link href="https://jishuyao.cn/atom.xml" rel="self"/>
   
   <link href="https://jishuyao.cn/"/>
-  <updated>2022-12-19T10:07:59.592Z</updated>
+  <updated>2022-12-20T06:32:05.671Z</updated>
   <id>https://jishuyao.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于rem和scale的屏幕适配方案</title>
+    <link href="https://jishuyao.cn/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/"/>
+    <id>https://jishuyao.cn/2022/12/20/%E5%9F%BA%E4%BA%8Erem%E5%92%8Cscale%E7%9A%84%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</id>
+    <published>2022-12-20T06:22:48.000Z</published>
+    <updated>2022-12-20T06:32:05.671Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;基于rem的适配方案&quot;&gt;&lt;a href=&quot;#基于rem的适配方案&quot; class=&quot;headerlink&quot; title=&quot;基于rem的适配方案&quot;&gt;&lt;/a&gt;基于rem的适配方案&lt;/h2&gt;&lt;h4 id=&quot;rem是什么？&quot;&gt;&lt;a href=&quot;#rem是什么？&quot; class</summary>
+      
+    
+    
+    
+    <category term="CSS" scheme="https://jishuyao.cn/categories/CSS/"/>
+    
+    
+    <category term="CSS" scheme="https://jishuyao.cn/tags/CSS/"/>
+    
+    <category term="Vue" scheme="https://jishuyao.cn/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>js数组去重-排序-查询-删除-json处理</title>
