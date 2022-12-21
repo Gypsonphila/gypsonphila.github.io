@@ -6,7 +6,7 @@
   <link href="https://jishuyao.cn/atom.xml" rel="self"/>
   
   <link href="https://jishuyao.cn/"/>
-  <updated>2022-12-21T06:58:26.473Z</updated>
+  <updated>2022-12-21T08:13:11.098Z</updated>
   <id>https://jishuyao.cn/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nodejs压缩包安装及环境配置</title>
+    <link href="https://jishuyao.cn/2022/12/21/nodejs%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AE%89%E8%A3%85%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>https://jishuyao.cn/2022/12/21/nodejs%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AE%89%E8%A3%85%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-12-21T07:52:03.000Z</published>
+    <updated>2022-12-21T08:13:11.098Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;在&lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node官网&lt;/a&gt;先下载好Node安装包，压</summary>
+      
+    
+    
+    
+    <category term="前端开发" scheme="https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="Node" scheme="https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/Node/"/>
+    
+    
+    <category term="Node" scheme="https://jishuyao.cn/tags/Node/"/>
+    
+  </entry>
   
   <entry>
     <title>webpack配置eslint来查找和修复 JavaScript 代码中的问题</title>

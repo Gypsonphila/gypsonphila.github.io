@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jishuyao.cn/2022/12/21/nodejs%E5%8E%8B%E7%BC%A9%E5%8C%85%E5%AE%89%E8%A3%85%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2022-12-21</lastmod>
+  </url>
+  <url>
     <loc>https://jishuyao.cn/2022/12/21/webpack%E9%85%8D%E7%BD%AEeslint%E6%9D%A5%E6%9F%A5%E6%89%BE%E5%92%8C%E4%BF%AE%E5%A4%8D%20JavaScript%20%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2022-12-21</lastmod>
   </url>
@@ -29,11 +33,11 @@
     <lastmod>2022-12-19</lastmod>
   </url>
   <url>
-    <loc>https://jishuyao.cn/2022/12/18/Nuxt2%E5%AE%89%E8%A3%85/</loc>
+    <loc>https://jishuyao.cn/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/</loc>
     <lastmod>2022-12-19</lastmod>
   </url>
   <url>
-    <loc>https://jishuyao.cn/2022/12/18/Nuxt%E4%B8%AD%E4%BD%BF%E7%94%A8CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/</loc>
+    <loc>https://jishuyao.cn/2022/12/18/Nuxt2%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2022-12-19</lastmod>
   </url>
 </urlset> 
