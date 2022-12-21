@@ -6,7 +6,7 @@
   <link href="https://jishuyao.cn/atom.xml" rel="self"/>
   
   <link href="https://jishuyao.cn/"/>
-  <updated>2022-12-20T06:32:05.671Z</updated>
+  <updated>2022-12-21T06:58:26.473Z</updated>
   <id>https://jishuyao.cn/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webpack配置eslint来查找和修复 JavaScript 代码中的问题</title>
+    <link href="https://jishuyao.cn/2022/12/21/webpack%E9%85%8D%E7%BD%AEeslint%E6%9D%A5%E6%9F%A5%E6%89%BE%E5%92%8C%E4%BF%AE%E5%A4%8D%20JavaScript%20%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://jishuyao.cn/2022/12/21/webpack%E9%85%8D%E7%BD%AEeslint%E6%9D%A5%E6%9F%A5%E6%89%BE%E5%92%8C%E4%BF%AE%E5%A4%8D%20JavaScript%20%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2022-12-21T06:42:12.000Z</published>
+    <updated>2022-12-21T06:58:26.473Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;需要用到&lt;code&gt;EslintWebpackPlugin&lt;/code&gt;插件，该插件使用 &lt;a href=&quot;https://eslint.org/&quot;&gt;&lt;code&gt;eslint&lt;/code&gt;&lt;/a&gt; 来查找和修复 JavaScript 代码中的问题。</summary>
+      
+    
+    
+    
+    <category term="webpack" scheme="https://jishuyao.cn/categories/webpack/"/>
+    
+    
+    <category term="前端开发" scheme="https://jishuyao.cn/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="webpack" scheme="https://jishuyao.cn/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>基于rem和scale的屏幕适配方案</title>
