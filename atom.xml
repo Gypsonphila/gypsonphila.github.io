@@ -6,7 +6,7 @@
   <link href="https://jishuyao.cn/atom.xml" rel="self"/>
   
   <link href="https://jishuyao.cn/"/>
-  <updated>2022-12-21T12:59:30.505Z</updated>
+  <updated>2022-12-21T13:05:37.332Z</updated>
   <id>https://jishuyao.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://jishuyao.cn/2022/12/21/create-react-app%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>https://jishuyao.cn/2022/12/21/create-react-app%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</id>
     <published>2022-12-21T12:52:34.000Z</published>
-    <updated>2022-12-21T12:59:30.505Z</updated>
+    <updated>2022-12-21T13:05:37.332Z</updated>
     
     
       
@@ -32,6 +32,10 @@
     
     
     
+    <category term="前端开发" scheme="https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="node" scheme="https://jishuyao.cn/tags/node/"/>
     
   </entry>
   
