@@ -6,7 +6,7 @@
   <link href="https://jishuyao.cn/atom.xml" rel="self"/>
   
   <link href="https://jishuyao.cn/"/>
-  <updated>2022-12-21T12:55:31.312Z</updated>
+  <updated>2022-12-21T12:59:30.505Z</updated>
   <id>https://jishuyao.cn/</id>
   
   <author>
@@ -21,12 +21,13 @@
     <link href="https://jishuyao.cn/2022/12/21/create-react-app%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>https://jishuyao.cn/2022/12/21/create-react-app%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/</id>
     <published>2022-12-21T12:52:34.000Z</published>
-    <updated>2022-12-21T12:55:31.312Z</updated>
+    <updated>2022-12-21T12:59:30.505Z</updated>
     
     
       
       
-    <summary type="html">&lt;p&gt;npm默认的源是&lt;a href=&quot;https://registry.npmjs.org/%EF%BC%8C%E5%9C%B0%E5%9D%80%E5%9C%A8%E5%A2%99%E5%A4%96%E6%89%80%E4%BB%A5%E4%BC%9A%E6%AF%94%E8</summary>
+    <summary type="html">&lt;p&gt;npm默认的源是&lt;code&gt;https://registry.npmjs.org/&lt;/code&gt;，地址在墙外所以会比较慢，可以采用换源的方式，换成国内淘宝的资源。&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class</summary>
       
     
     

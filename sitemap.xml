@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/index.html</loc>
+    <loc>https://jishuyao.cn/about/index.html</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/about/index.html</loc>
+    <loc>https://jishuyao.cn/categories/index.html</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -195,6 +195,13 @@
   </url>
   
   <url>
+    <loc>https://jishuyao.cn/tags/webpack/</loc>
+    <lastmod>2022-12-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jishuyao.cn/tags/CSS/</loc>
     <lastmod>2022-12-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -203,13 +210,6 @@
   
   <url>
     <loc>https://jishuyao.cn/tags/Vue/</loc>
-    <lastmod>2022-12-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jishuyao.cn/tags/webpack/</loc>
     <lastmod>2022-12-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -267,14 +267,14 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/CSS/</loc>
+    <loc>https://jishuyao.cn/categories/webpack/</loc>
     <lastmod>2022-12-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/webpack/</loc>
+    <loc>https://jishuyao.cn/categories/CSS/</loc>
     <lastmod>2022-12-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
