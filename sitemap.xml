@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/2022/12/18/Nuxt2%E5%AE%89%E8%A3%85/</loc>
+    <loc>https://jishuyao.cn/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&%E8%8A%82%E6%B5%81/</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/2022/12/18/JavaScript%E9%98%B2%E6%8A%96&%E8%8A%82%E6%B5%81/</loc>
+    <loc>https://jishuyao.cn/2022/12/18/Nuxt2%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -155,14 +155,14 @@
 
   
   <url>
-    <loc>https://jishuyao.cn/tags/Nuxt/</loc>
+    <loc>https://jishuyao.cn/tags/JavaScript/</loc>
     <lastmod>2023-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/tags/JavaScript/</loc>
+    <loc>https://jishuyao.cn/tags/Nuxt/</loc>
     <lastmod>2023-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -190,14 +190,14 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/tags/Git/</loc>
+    <loc>https://jishuyao.cn/tags/node/</loc>
     <lastmod>2023-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/tags/node/</loc>
+    <loc>https://jishuyao.cn/tags/Git/</loc>
     <lastmod>2023-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -241,6 +241,13 @@
 
   
   <url>
+    <loc>https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2023-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jishuyao.cn/categories/SSR/</loc>
     <lastmod>2023-01-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -248,7 +255,7 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/</loc>
     <lastmod>2023-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -263,13 +270,6 @@
   
   <url>
     <loc>https://jishuyao.cn/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2023-01-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/JavaScript/</loc>
     <lastmod>2023-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
