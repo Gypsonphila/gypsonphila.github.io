@@ -6,7 +6,7 @@
   <link href="https://jishuyao.cn/atom.xml" rel="self"/>
   
   <link href="https://jishuyao.cn/"/>
-  <updated>2023-01-04T09:05:06.531Z</updated>
+  <updated>2023-01-09T06:51:52.289Z</updated>
   <id>https://jishuyao.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pip安装django失败的解决方案</title>
+    <link href="https://jishuyao.cn/2023/01/09/pip%E5%AE%89%E8%A3%85django%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>https://jishuyao.cn/2023/01/09/pip%E5%AE%89%E8%A3%85django%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2023-01-09T06:49:19.000Z</published>
+    <updated>2023-01-09T06:51:52.289Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;windows使用pip安装django包的时候安装到一半会报一大堆的错&quot;&gt;&lt;a href=&quot;#windows使用pip安装django包的时候安装到一半会报一大堆的错&quot; class=&quot;headerlink&quot; title=&quot;windows使用pip安装django</summary>
+      
+    
+    
+    
+    <category term="Python" scheme="https://jishuyao.cn/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://jishuyao.cn/tags/Python/"/>
+    
+    <category term="Django" scheme="https://jishuyao.cn/tags/Django/"/>
+    
+  </entry>
   
   <entry>
     <title>windows笔记本电脑查看电池详细信息</title>
