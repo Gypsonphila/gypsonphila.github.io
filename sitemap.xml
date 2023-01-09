@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jishuyao.cn/2023/01/09/npm%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</loc>
+    
+    <lastmod>2023-01-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jishuyao.cn/2023/01/09/pip%E5%AE%89%E8%A3%85django%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
     
     <lastmod>2023-01-09</lastmod>
@@ -65,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/tags/index.html</loc>
+    <loc>https://jishuyao.cn/repository/index.html</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -74,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/repository/index.html</loc>
+    <loc>https://jishuyao.cn/tags/index.html</loc>
     
     <lastmod>2022-12-19</lastmod>
     
@@ -234,14 +243,14 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/tags/windows/</loc>
+    <loc>https://jishuyao.cn/tags/webpack/</loc>
     <lastmod>2023-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/tags/webpack/</loc>
+    <loc>https://jishuyao.cn/tags/windows/</loc>
     <lastmod>2023-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -299,14 +308,14 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/Node/</loc>
+    <loc>https://jishuyao.cn/categories/JavaScript/</loc>
     <lastmod>2023-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/JavaScript/</loc>
+    <loc>https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/Node/</loc>
     <lastmod>2023-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -320,14 +329,14 @@
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/windows/</loc>
+    <loc>https://jishuyao.cn/categories/webpack/</loc>
     <lastmod>2023-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jishuyao.cn/categories/webpack/</loc>
+    <loc>https://jishuyao.cn/categories/windows/</loc>
     <lastmod>2023-01-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

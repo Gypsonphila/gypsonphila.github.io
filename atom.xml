@@ -6,7 +6,7 @@
   <link href="https://jishuyao.cn/atom.xml" rel="self"/>
   
   <link href="https://jishuyao.cn/"/>
-  <updated>2023-01-09T06:51:52.289Z</updated>
+  <updated>2023-01-09T09:03:13.093Z</updated>
   <id>https://jishuyao.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>npm快速生成目录结构</title>
+    <link href="https://jishuyao.cn/2023/01/09/npm%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/"/>
+    <id>https://jishuyao.cn/2023/01/09/npm%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</id>
+    <published>2023-01-09T09:01:25.000Z</published>
+    <updated>2023-01-09T09:03:13.093Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;安装全局依赖&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="前端开发" scheme="https://jishuyao.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="node" scheme="https://jishuyao.cn/tags/node/"/>
+    
+  </entry>
   
   <entry>
     <title>pip安装django失败的解决方案</title>
